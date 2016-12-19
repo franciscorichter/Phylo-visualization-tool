@@ -8,10 +8,10 @@ shinyUI(
       numericInput("K", "K:", min = 1, max = 200, value = 40),
       numericInput("mu", "Mu:", min = 0, max = 2, value = 0.1),
       numericInput("tt", "Crown time:", min = 1, max = 30, value = 15),
-      selectInput('model',"Model",c('Diversity-dependence')),
+      selectInput('model',"Model",c('Diversity-dependence', "Protracted")),
       br(),
       actionButton("goButton", "Simulate tree"),
-      p("Click the button to simulate a phylogenetic tree under given parameters")
+      ("Click the button to simulate a phylogenetic tree under given parameters")
     ),
     sidebarPanel(
       titlePanel('Plot options'),

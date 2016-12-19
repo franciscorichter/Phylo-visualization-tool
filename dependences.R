@@ -7,7 +7,28 @@ library(phytools)
 library(ape)
 library(subplex)
 
-phyl2 <- function(tt=15, lambda0=0.8, mu0=0.1, K=40, draw=TRUE, model="dd",printEv=FALSE,seed=1){
+#' Run a model
+#' @param model the type of model, must
+#'   be 'Diversity-dependence' or 'Protracted'
+#' @param tt crown age time, in million years
+#' @param lambda0 ?birth rate, per million years per lineage
+#' @param K carrying capacity, in number of species
+#' @param draw ?no indea
+#' @param printEv ?no idea
+#' @param seed random number generator seed, can be any integer number
+phyl2 <- function(
+  model,
+  tt = 15,
+  lambda0=0.8,
+  mu0=0.1,
+  K=40,
+  draw=TRUE,
+  printEv=FALSE,
+  seed=1
+){
+  if (model != "Diversity-dependence") {
+    stop("Incorrect model")
+  }
   # Phylogenetic tree simulation
   set.seed(seed)
   reboot = 0
@@ -21,7 +42,7 @@ phyl2 <- function(tt=15, lambda0=0.8, mu0=0.1, K=40, draw=TRUE, model="dd",print
   newick = paste(sl[1],";",sep="")  # Newick tree
   identf = data.frame(Spec="aa",Time=0)
   while (sumt<tt){
-    if (model == "dd"){  #diversity-dependence model
+    if (model == "Diversity-dependence"){
       lambda = max(0,lambda0 - (lambda0-mu0)*N/K)
       mu = mu0
       lambda = rep(lambda,N)

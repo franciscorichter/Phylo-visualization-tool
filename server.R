@@ -6,7 +6,14 @@ shinyServer(function(input, output) {
 
   randomVals <- eventReactive(input$goButton, {
     seed=round(runif(1,1,10000000))
-    phyl2(tt=input$tt, lambda0=input$lambda,mu0=input$mu,K=input$K, seed=seed)
+    phyl2(
+      tt=input$tt,
+      lambda0=input$lambda,
+      mu0=input$mu,
+      K=input$K,
+      seed=seed,
+      model=input$model
+    )
 
   })
   output$distPlot <- renderPlot({
